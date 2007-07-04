@@ -1,0 +1,24 @@
+---
+name: Net-Google-GData
+version: 0.01
+author:
+  - 'Alan Young <alansyoungiii@gmail.com>'
+abstract: Handle basic communication with Google services
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Class::ErrorHandler: 0
+  Test::More: 0
+  XML::Atom: 0
+provides:
+  Net::Google::Authenticate:
+    file: lib/Net/Google/Authenticate.pm
+    version: 0.01
+  Net::Google::GData:
+    file: lib/Net/Google/GData.pm
+    version: 0.01
+generated_by: Module::Build version 0.2805
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
