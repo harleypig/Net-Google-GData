@@ -1,25 +1,25 @@
 package Net::Google::GData;
 
+# ABSTRACT: Handle basic communication with Google services
+
 use warnings;
 use strict;
 
-=head1 NAME
-
-Net::Google::GData - Handle basic communication with Google services
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
+# VERSION
 
 =head1 SYNOPSIS
+
+THIS MODULE IS NOT MAINTAINED ANYMORE
+
+I fixed what was causing cpantesters to barf. I don't think the API this was written for is even valid anymore.
 
 Net::Google::GData handles the basic communication details with Google services.
 
 This module should normally only be used by modules subclassing GData.
+
+=head1 DESCRIPTION
+
+would go here
 
 =cut
 
@@ -28,9 +28,9 @@ use LWP::UserAgent;
 
 use base qw( Class::Accessor  Class::ErrorHandler Net::Google::Authenticate );
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_accessors( qw(
 
-));
+) );
 
 =head1 FUNCTIONS
 
@@ -60,14 +60,14 @@ sub new {
 
     if ( my $method = $self->can( $data[$i] ) ) {
 
-      $self->$method( $data[$i+1] );
+      $self->$method( $data[ $i + 1 ] );
 
     }
   }
 
   return $self;
 
-}
+} ## end sub new
 
 =head2 get
 
@@ -79,9 +79,9 @@ sub new {
 
 =cut
 
-sub GET { }
-sub POST { }
-sub PUT { }
+sub GET    { }
+sub POST   { }
+sub PUT    { }
 sub DELETE { }
 
 =head1 PRIVATE FUNCTIONS
@@ -116,57 +116,6 @@ sub _ua {
 
   return $ua;
 
-}
+} ## end sub _ua
 
-=head1 AUTHOR
-
-Alan Young, C<< <alansyoungiii at gmail.com> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-net-google-gdata at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Net-Google-GData>.
-I will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Net::Google::GData
-
-You can also look for information at:
-
-=over 4
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Net-Google-GData>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Net-Google-GData>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Net-Google-GData>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Net-Google-GData>
-
-=back
-
-=head1 ACKNOWLEDGEMENTS
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2007 Alan Young, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
-
-1; # End of Net::Google::GData
+1;  # End of Net::Google::GData

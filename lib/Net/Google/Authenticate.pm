@@ -1,19 +1,11 @@
 package Net::Google::Authenticate;
 
+# aBSTRACT: would go here
+
 use warnings;
 use strict;
 
-=head1 NAME
-
-Net::Google::Authenticate - Login handler for Google services
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
+# VERSION
 
 =head1 SYNOPSIS
 
@@ -22,17 +14,21 @@ Net::Google::Authenticate handles the login procedures for Google services.
 This module is a base class for Net::Google::GData.  Unless you want to write
 your own GData module, or equivalent, you're not going to be using this module.
 
+=head1 DESCRIPTION
+
+A description would go here.
+
 =cut
 
 use Carp;
 
 use base qw( Class::Accessor Class::ErrorHandler );
 
-__PACKAGE__->mk_accessors(qw(
+__PACKAGE__->mk_accessors( qw(
 
-  Email Passwd source _auth
+    Email Passwd source _auth
 
-));
+) );
 
 =head1 FUNCTIONS
 
@@ -87,12 +83,12 @@ Currently known codes are as follows:
 
   Service                       Code
   ----------------------------  -------
-  Calendar data API	        cl
-  Blogger data API	        blogger
-  Google Base data API	        gbase
-  Spreadsheets data API	        wise
-  Google Apps Provisioning API	apps
-  Picasa Web Albums Data API	lh2
+  Calendar data API             cl
+  Blogger data API              blogger
+  Google Base data API          gbase
+  Spreadsheets data API         wise
+  Google Apps Provisioning API  apps
+  Picasa Web Albums Data API    lh2
   Default Service               xapi
 
 Defaults to B<xapi>.
@@ -150,7 +146,7 @@ sub login {
 
   use warnings 'uninitialized';
 
-  my %params = map { ( $_ , $self->$_ ) } @required;
+  my %params = map { ( $_, $self->$_ ) } @required;
 
   no warnings 'uninitialized';
 
@@ -180,7 +176,7 @@ sub login {
     croak 'PANIC: Got unexpected response (' . $r->code . ')';
 
   }
-}
+} ## end sub login
 
 =head1 PRIVATE FUNCTIONS
 
@@ -191,30 +187,30 @@ L<http://code.google.com/apis/accounts/AuthForInstalledApps.html#Errors>.
 
 =cut
 
-{ my %codes = (
+{
+  my %codes = (
 
-    'BadAuthentication'  => 'The login request used a username or password that is not recognized.',
+    'BadAuthentication' => 'The login request used a username or password that is not recognized.',
 
-    'NotVerified'        => 'The account email address has not been verified. The user will need to '
-                         .  'access their Google account directly to resolve the issue before logging '
-			 .  'in using a non-Google application.',
+    'NotVerified' => 'The account email address has not been verified. The user will need to '
+      . 'access their Google account directly to resolve the issue before logging '
+      . 'in using a non-Google application.',
 
-    'TermsNotAgreed'     => 'The user has not agreed to terms. The user will need to access their '
-                         .  'Google account directly to resolve the issue before logging in using a '
-			 .  'non-Google application.',
+    'TermsNotAgreed' => 'The user has not agreed to terms. The user will need to access their '
+      . 'Google account directly to resolve the issue before logging in using a '
+      . 'non-Google application.',
 
-    'CaptchaRequired'    => 'A CAPTCHA is required. (A response with this error code will also contain '
-                         .  'an image URL and a CAPTCHA token.)',
+    'CaptchaRequired' => 'A CAPTCHA is required. (A response with this error code will also contain '
+      . 'an image URL and a CAPTCHA token.)',
 
-    'Unknown'            => 'The error is unknown or unspecified; the request contained invalid input '
-                         .  'or was malformed.',
+    'Unknown' => 'The error is unknown or unspecified; the request contained invalid input ' . 'or was malformed.',
 
-    'AccountDeleted'     => 'The user account has been deleted.',
+    'AccountDeleted' => 'The user account has been deleted.',
 
-    'AccountDisabled'    => 'The user account has been disabled.',
+    'AccountDisabled' => 'The user account has been disabled.',
 
-    'ServiceDisabled'    => 'The user\'s access to the specified service has been disabled. (The user '
-                         .  'account may still be valid.)',
+    'ServiceDisabled' => 'The user\'s access to the specified service has been disabled. (The user '
+      . 'account may still be valid.)',
 
     'ServiceUnavailable' => 'The service is not available; try again later.',
 
@@ -222,60 +218,8 @@ L<http://code.google.com/apis/accounts/AuthForInstalledApps.html#Errors>.
 
   sub _error_code { return exists $codes{ $_[1] } ? $codes{ $_[1] } : $codes{ 'Unknown' } }
 
-  sub _codes { %codes } # This is for testing
+  sub _codes { %codes }  # This is for testing
 
 }
 
-
-=head1 AUTHOR
-
-Alan Young, C<< <alansyoungiii at gmail.com> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-net-google-gdata at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Net-Google-Authenticate>.
-I will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Net::Google::Authenticate
-
-You can also look for information at:
-
-=over 4
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Net-Google-Authenticate>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Net-Google-GData>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Net-Google-GData>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Net-Google-GData>
-
-=back
-
-=head1 ACKNOWLEDGEMENTS
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2007 Alan Young, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
-
-1; # End of Net::Google::GData
+1;                       # End of Net::Google::GData
