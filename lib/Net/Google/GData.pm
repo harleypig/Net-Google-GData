@@ -5,7 +5,7 @@ package Net::Google::GData;
 use warnings;
 use strict;
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 
 use Carp;
@@ -93,7 +93,7 @@ Net::Google::GData - Handle basic communication with Google services
 
 =head1 VERSION
 
-  This document describes v0.02 of Net::Google::GData - released December 25, 2012 as part of Net-Google-GData.
+  This document describes v0.03 of Net::Google::GData - released December 25, 2012 as part of Net-Google-GData.
 
 =head1 SYNOPSIS
 

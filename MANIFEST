@@ -8,6 +8,7 @@ META.yml
 README
 lib/Net/Google/Authenticate.pm
 lib/Net/Google/GData.pm
+perltidy.LOG
 t/00-check-deps.t
 t/00-compile.t
 t/00-load.t
