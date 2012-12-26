@@ -1,6 +1,6 @@
 package Net::Google::Authenticate;
 
-# aBSTRACT: would go here
+# ABSTRACT: would go here
 
 use warnings;
 use strict;
@@ -22,13 +22,16 @@ A description would go here.
 
 use Carp;
 
+## no critic( Tics::ProhibitUseBase )
 use base qw( Class::Accessor Class::ErrorHandler );
 
+## no critic( Modules::RequireExplicitInclusion )
 __PACKAGE__->mk_accessors( qw(
 
     Email Passwd source _auth
 
 ) );
+## use critic
 
 =head1 FUNCTIONS
 
@@ -40,11 +43,11 @@ Defaults to B<HOSTED_OR_GOOGLE>.
 
 =cut
 
-sub _valid_accountType { qw( HOSTED GOOGLE HOSTED_OR_GOOGLE ) }
+sub _valid_accountType { return qw( HOSTED GOOGLE HOSTED_OR_GOOGLE ) }
 
-sub _default_accountType { 'HOSTED_OR_GOOGLE' }
+sub _default_accountType { return 'HOSTED_OR_GOOGLE' } ## no critic( Subroutines::ProhibitUnusedPrivateSubroutines )
 
-sub accountType {
+sub accountType { ## no critic( Subroutines::RequireArgUnpacking )
 
   my $self = shift;
 
@@ -58,7 +61,7 @@ sub accountType {
   return $self->error( "Invalid accountType: $type" )
     unless grep { $type eq $_ } @valid;
 
-  $self->SUPER::set( 'accountType', $type );
+  return $self->SUPER::set( 'accountType', $type );
 
 }
 
@@ -95,11 +98,11 @@ Defaults to B<xapi>.
 
 =cut
 
-sub _valid_service { qw( cl blogger gbase wise apps lh2 xapi ) }
+sub _valid_service { return qw( cl blogger gbase wise apps lh2 xapi ) }
 
-sub _default_service { 'xapi' }
+sub _default_service { return 'xapi' } ## no critic( Subroutines::ProhibitUnusedPrivateSubroutines )
 
-sub service {
+sub service { ## no strict( Subroutines::RequireArgUnpacking )
 
   my $self = shift;
 
@@ -113,7 +116,7 @@ sub service {
   $self->error( "Unknown service code: $code" )
     unless grep { $code eq $_ } @known;
 
-  $self->SUPER::set( 'service', $code );
+  return $self->SUPER::set( 'service', $code );
 
 }
 
@@ -131,12 +134,13 @@ Login to the google services page.
 
 =cut
 
-sub login {
+sub login { ## no critic( Subroutines::RequireFinalReturn )
 
   my $self = shift;
 
   my @required = qw( accountType Email Passwd service source );
 
+  ## no critic( TestingAndDebugging::ProhibitNoWarnings )
   no warnings 'uninitialized';
 
   my $missing = join ', ', grep { $self->$_ eq '' } @required;
@@ -152,13 +156,13 @@ sub login {
 
   my $r = $self->_ua->post( 'https://www.google.com/accounts/ClientLogin', \%params );
 
-  if ( $r->code == 403 ) {
+  if ( $r->code == 403 ) { ## no critic( ValuesAndExpressions::ProhibitMagicNumbers )
 
     my ( $error ) = $r->content =~ m!Error=(.+)(\s+|$)!i;
 
     return $self->error( "Invalid login: $error (" . _error_code( $error ) . ')' );
 
-  } elsif ( $r->code == 200 ) {
+  } elsif ( $r->code == 200 ) { ## no critic( ValuesAndExpressions::ProhibitMagicNumbers )
 
     my ( $auth ) = $r->content =~ m!Auth=(.+)(\s+|$)!i;
 
@@ -216,10 +220,10 @@ L<http://code.google.com/apis/accounts/AuthForInstalledApps.html#Errors>.
 
   );
 
-  sub _error_code { return exists $codes{ $_[1] } ? $codes{ $_[1] } : $codes{ 'Unknown' } }
+  sub _error_code { return exists $codes{ $_[1] } ? $codes{ $_[1] } : $codes{ 'Unknown' } } ## no critic( Subroutines::RequireArgUnpacking )
 
-  sub _codes { %codes }  # This is for testing
+  sub _codes { return %codes } ## no critic( Subroutines::ProhibitUnusedPrivateSubroutines )
 
 }
 
-1;                       # End of Net::Google::GData
+1; # End of Net::Google::GData

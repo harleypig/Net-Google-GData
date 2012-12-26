@@ -1,8 +1,9 @@
 Revision history for Net-Google-GData
 
 {{$NEXT}}
-    Make tests pass so cpantesters will stop choking on this module.
+  Convert to Dist::Zilla
+  Make tests pass so cpantesters will stop choking on this module.
 
-0.01    06/21/2007 23:20
-        First version, released on an unsuspecting world.
+0.01      2007-06-21 23:20:00 America/Boise
+  First version, released on an unsuspecting world.
 

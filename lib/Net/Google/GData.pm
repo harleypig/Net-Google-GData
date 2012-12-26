@@ -69,13 +69,13 @@ sub new {
 
 } ## end sub new
 
-=head2 get
+=head2 GET
 
-=head2 post
+=head2 POST
 
-=head2 put
+=head2 PUT
 
-=head2 delete
+=head2 DELETE
 
 =cut
 
